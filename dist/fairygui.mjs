@@ -6738,7 +6738,7 @@ class InputProcessor extends Component {
     }
     setEnd(ti) {
         ti.began = false;
-        let now = director.getTotalTime() / 1000;
+        let now = game.totalTime / 1000;
         let elapsed = now - ti.lastClickTime;
         if (elapsed < 0.45) {
             if (ti.clickCount == 2)
@@ -8009,7 +8009,7 @@ class ScrollPane extends Component {
         this._isHoldAreaDone = false;
         this._velocity.set(Vec2.ZERO);
         this._velocityScale = 1;
-        this._lastMoveTime = director.getTotalTime() / 1000;
+        this._lastMoveTime = game.totalTime / 1000;
     }
     onTouchMove(evt) {
         if (!isValid(this._owner.node))
@@ -8109,7 +8109,7 @@ class ScrollPane extends Component {
                 this._container.setPosition(newPosX, this._container.position.y);
         }
         //更新速度
-        var now = director.getTotalTime() / 1000;
+        var now = game.totalTime / 1000;
         var deltaTime = Math.max(now - this._lastMoveTime, 1 / 60);
         var deltaPositionX = pt.x - this._lastTouchPos.x;
         var deltaPositionY = pt.y - this._lastTouchPos.y;
@@ -8226,7 +8226,7 @@ class ScrollPane extends Component {
             //更新速度
             if (!this._inertiaDisabled) {
                 var frameRate = 60;
-                var elapsed = (director.getTotalTime() / 1000 - this._lastMoveTime) * frameRate - 1;
+                var elapsed = (game.totalTime / 1000 - this._lastMoveTime) * frameRate - 1;
                 if (elapsed > 1) {
                     var factor = Math.pow(0.833, elapsed);
                     this._velocity.x = this._velocity.x * factor;
@@ -17158,7 +17158,7 @@ class AsyncOperationRunner extends Component {
         var di;
         var poolStart;
         var k;
-        var t = director.getTotalTime() / 1000;
+        var t = game.totalTime / 1000;
         var frameTime = UIConfig.frameTimeForAsyncUIConstruction;
         var totalItems = this._itemList.length;
         while (this._index < totalItems) {
@@ -17188,7 +17188,7 @@ class AsyncOperationRunner extends Component {
                 }
             }
             this._index++;
-            if ((this._index % 5 == 0) && director.getTotalTime() / 1000 - t >= frameTime)
+            if ((this._index % 5 == 0) && game.totalTime / 1000 - t >= frameTime)
                 return;
         }
         var result = this._objectPool[0];
