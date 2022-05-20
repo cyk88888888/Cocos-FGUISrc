@@ -12,7 +12,7 @@ export class GImage extends GObject {
         super();
 
         this._node.name = "GImage";
-        this._touchDisabled = true;
+        this._touchDisabled = false;
         this._content = this._node.addComponent(Image);
         this._content.sizeMode = Sprite.SizeMode.CUSTOM;
         this._content.trim = false;
