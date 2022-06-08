@@ -1,4 +1,4 @@
-import { AudioClip, Color, EventMouse } from "cc";
+import { Asset, AudioClip, Color, EventMouse, resources } from "cc";
 import { Controller } from "./Controller";
 import { Event as FUIEvent } from "./event/Event";
 import { ButtonMode, ObjectPropID } from "./FieldTypes";
@@ -523,12 +523,24 @@ export class GButton extends GComponent {
 
     private onClick_1(): void {
         if (this._sound) {
-            var pi: PackageItem = UIPackage.getItemByURL(this._sound);
-            if (pi) {
-                var sound: AudioClip = <AudioClip>pi.owner.getItemAsset(pi);
-                if (sound)
-                    GRoot.inst.playOneShotSound(sound, this._soundVolumeScale);
+            if(resources.get(this._sound)){
+                GRoot.inst.playOneShotSound(resources.get(this._sound), this._soundVolumeScale);
+            }else{
+                resources.load(this._sound, Asset, (err: Error | null, asset: Asset) => {
+                    if (!err) {
+                        GRoot.inst.playOneShotSound(asset as AudioClip, this._soundVolumeScale);
+                    } else {
+                        console.error('resName: ' + this._sound + '加载失败');
+                    }
+                })
             }
+            
+            // var pi: PackageItem = UIPackage.getItemByURL(this._sound);
+            // if (pi) {
+            //     var sound: AudioClip = <AudioClip>pi.owner.getItemAsset(pi);
+            //     if (sound)
+            //         GRoot.inst.playOneShotSound(sound, this._soundVolumeScale);
+            // }
         }
 
         if (this._mode == ButtonMode.Check) {
