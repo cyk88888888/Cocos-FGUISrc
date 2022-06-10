@@ -2,7 +2,7 @@
  * @Author: ‘cyk’ '935765353@qq.com'
  * @Date: 2022-06-08 15:04:51
  * @LastEditors: ‘cyk’ '935765353@qq.com'
- * @LastEditTime: 2022-06-10 10:48:17
+ * @LastEditTime: 2022-06-10 14:19:05
  * @FilePath: \Cocos-FGUISrc\src\event\Event.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -32,6 +32,7 @@ export class Event extends CCEvent {
     public static SIZE_DELAY_CHANGE: string = "fui_size_delay_change";
     public static ADD_TO_SATGE: string = "fui_add_to_stage";
     public static REMOVE_FROM_SATGE: string = "fui_remove_from_stage";
+    public static ON_CREATE_UI_OBJECT: string = "fui_on_create_ui_object";
 
     public static DRAG_START: string = "fui_drag_start";
     public static DRAG_MOVE: string = "fui_drag_move";

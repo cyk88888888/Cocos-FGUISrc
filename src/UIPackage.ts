@@ -7,6 +7,7 @@ import { TranslationHelper } from "./TranslationHelper";
 import { ByteBuffer } from "./utils/ByteBuffer";
 import { PixelHitTestData } from "./event/HitTest";
 import { Frame } from "./display/MovieClip";
+import { Event as FUIEvent } from "./event/Event";
 
 type PackageDependency = { id: string, name: string };
 
@@ -206,10 +207,20 @@ export class UIPackage {
             delete _instById[pkg._path];
     }
 
-    public static createObject(pkgName: string, resName: string, userClass?: new () => GObject): GObject {
+    public static createObject(pkgName: string, resName: string, userClass?: new () => GObject, cb?: Function, ctx?: any): GObject {
         var pkg: UIPackage = UIPackage.getByName(pkgName);
-        if (pkg)
-            return pkg.createObject(resName, userClass);
+        if (pkg){
+            let g = pkg.createObject(resName, userClass);
+            if(g){
+                if(cb){
+                    cb.call(ctx, g);
+                }
+                g._partner.callLater(()=>{
+                    g.node.emit(FUIEvent.ON_CREATE_UI_OBJECT, g);
+                });
+            }
+            return g;
+        }
         else
             return null;
     }
