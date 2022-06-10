@@ -169,6 +169,7 @@ export class GComponent extends GObject {
             this._children.splice(index, 1);
             child.group = null;
             this._container.removeChild(child.node);
+            child.node.emit(FUIEvent.REMOVE_FROM_SATGE);
             if (this._childrenRenderOrder == ChildrenRenderOrder.Arch)
                 this._partner.callLater(this.buildNativeDisplayList);
 
@@ -410,7 +411,7 @@ export class GComponent extends GObject {
     private onChildAdd(child: GObject, index: number): void {
         child.node.parent = this._container;
         child.node.active = child._finalVisible;
-
+        child.node.emit(FUIEvent.ADD_TO_SATGE);
         if (this._buildingDisplayList)
             return;
 

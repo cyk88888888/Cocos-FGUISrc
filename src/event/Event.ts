@@ -1,3 +1,11 @@
+/*
+ * @Author: ‘cyk’ '935765353@qq.com'
+ * @Date: 2022-06-08 15:04:51
+ * @LastEditors: ‘cyk’ '935765353@qq.com'
+ * @LastEditTime: 2022-06-10 10:48:17
+ * @FilePath: \Cocos-FGUISrc\src\event\Event.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { Event as CCEvent, Node, Touch, Vec2 } from 'cc';
 import { GObject } from '../GObject';
 import { InputProcessor } from './InputProcessor';
@@ -22,6 +30,8 @@ export class Event extends CCEvent {
     public static XY_CHANGED: string = "fui_xy_changed";
     public static SIZE_CHANGED: string = "fui_size_changed";
     public static SIZE_DELAY_CHANGE: string = "fui_size_delay_change";
+    public static ADD_TO_SATGE: string = "fui_add_to_stage";
+    public static REMOVE_FROM_SATGE: string = "fui_remove_from_stage";
 
     public static DRAG_START: string = "fui_drag_start";
     public static DRAG_MOVE: string = "fui_drag_move";
